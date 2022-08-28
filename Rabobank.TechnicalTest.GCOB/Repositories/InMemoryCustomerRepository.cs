@@ -9,10 +9,10 @@ namespace Rabobank.TechnicalTest.GCOB.Repositories
 {
     public class InMemoryCustomerRepository : ICustomerRepository
     {
-        private ConcurrentDictionary<int, Customer> Customers { get; } = new();
+        private static ConcurrentDictionary<int, Customer> Customers { get; } = new();
         private readonly ILogger _logger;
 
-        public InMemoryCustomerRepository(ILogger logger)
+        public InMemoryCustomerRepository(ILogger<InMemoryCustomerRepository> logger)
         {
             _logger = logger;
         }

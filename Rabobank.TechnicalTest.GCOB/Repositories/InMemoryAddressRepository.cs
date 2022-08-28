@@ -12,7 +12,7 @@ namespace Rabobank.TechnicalTest.GCOB.Repositories
         private ConcurrentDictionary<int, Address> Addresses { get; } = new();
         private readonly ILogger _logger;
 
-        public InMemoryAddressRepository(ILogger logger)
+        public InMemoryAddressRepository(ILogger<InMemoryAddressRepository> logger)
         {
             _logger = logger;
         }
