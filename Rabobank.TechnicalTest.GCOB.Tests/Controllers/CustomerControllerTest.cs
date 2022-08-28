@@ -45,5 +45,33 @@ namespace Rabobank.TechnicalTest.GCOB.Tests.Services
             resultValue.Should().NotBeNull();
             resultValue.Should().BeEquivalentTo(customerDto);
         }
+
+        [TestMethod]
+        public async Task Post_GivenTheCustomerDoesNotExist_WhenICallPost_ThenTheCustomerIsSaved_AndTheCustomerIsReturned()
+        {
+            // Arrange
+            var customerCreateRequest = _fixture.Create<CustomerCreateRequest>();
+            var customerDto = new CustomerDto()
+            {
+                City = customerCreateRequest.City,
+                Country = customerCreateRequest.Country,
+                FullName = $"{customerCreateRequest.Firstname} {customerCreateRequest.Lastname}",
+                Id = _fixture.Create<int>(),
+                Postcode = customerCreateRequest.Postcode,
+                Street = customerCreateRequest.Street
+            };
+            _fixture.Freeze<Mock<ICustomerService>>().Setup(x => x.AddCustomer(It.IsAny<CustomerCreateRequest>())).Returns(Task.FromResult(Result<CustomerDto>.Success(customerDto)));
+
+            var sut = _fixture.Create<CustomerController>();
+
+            // Act
+            var result = await sut.Post(customerCreateRequest);
+
+            // Assert
+            result.Should().BeOfType<OkObjectResult>();
+            var resultValue = ((OkObjectResult)result).Value as CustomerDto;
+            resultValue.Should().NotBeNull();
+            resultValue.Should().BeEquivalentTo(customerDto);
+        }
     }
 }

@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using Rabobank.TechnicalTest.GCOB.Dtos;
@@ -39,7 +37,7 @@ namespace Rabobank.TechnicalTest.GCOB.Controllers
         }
 
         [HttpPost]
-        public CustomerDto Post()
+        public Task<IActionResult> Post(CustomerCreateRequest request)
         {
             throw new NotImplementedException();
         }
