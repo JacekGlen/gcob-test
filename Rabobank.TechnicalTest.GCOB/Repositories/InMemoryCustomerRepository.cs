@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.Logging;
-using Rabobank.TechnicalTest.GCOB.Dtos;
 using System;
 using System.Collections.Concurrent;
 using System.Linq;
@@ -9,8 +8,8 @@ namespace Rabobank.TechnicalTest.GCOB.Repositories
 {
     public class InMemoryCustomerRepository : ICustomerRepository
     {
-        private ConcurrentDictionary<int, CustomerDto> Customers { get; } = new ConcurrentDictionary<int, CustomerDto>();
-        private ILogger _logger;
+        private ConcurrentDictionary<int, Customer> Customers { get; } = new();
+        private readonly ILogger _logger;
 
         public InMemoryCustomerRepository(ILogger logger)
         {

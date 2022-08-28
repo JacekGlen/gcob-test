@@ -6,7 +6,6 @@ using AutoFixture.AutoMoq;
 using Castle.Core.Logging;
 using FluentAssertions;
 using Moq;
-using Rabobank.TechnicalTest.GCOB.Dtos;
 using Rabobank.TechnicalTest.GCOB.Enums;
 using Rabobank.TechnicalTest.GCOB.Repositories;
 using Rabobank.TechnicalTest.GCOB.Services;
@@ -31,8 +30,8 @@ namespace Rabobank.TechnicalTest.GCOB.Tests.Services
         {
             // Arrange
             var customerToBeRetrieved = _fixture.Create<CustomerDto>();
-            var mockRepo = _fixture.Freeze<Mock<ICustomerRepository>>();
-            mockRepo.Setup(x => x.GetAsync(customerToBeRetrieved.Id)).Returns(Task.FromResult(customerToBeRetrieved));
+            _fixture.Freeze<Mock<ICustomerRepository>>().Setup(x => x.GetAsync(customerToBeRetrieved.Id))
+                .Returns(Task.FromResult(customerToBeRetrieved));
             var sut = _fixture.Create<CustomerService>();
 
             // Act
@@ -48,9 +47,9 @@ namespace Rabobank.TechnicalTest.GCOB.Tests.Services
         {
             // Arrange
             var customerId = _fixture.Create<int>();
-            var mockRepo = _fixture.Freeze<Mock<ICustomerRepository>>();
             var errorMessage = customerId.ToString();
-            mockRepo.Setup(x => x.GetAsync(customerId)).Throws(new Exception(errorMessage));
+            _fixture.Freeze<Mock<ICustomerRepository>>().Setup(x => x.GetAsync(customerId))
+                .Throws(new Exception(errorMessage));
             var sut = _fixture.Create<CustomerService>();
 
             // Act

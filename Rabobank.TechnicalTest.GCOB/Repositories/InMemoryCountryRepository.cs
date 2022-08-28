@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.Logging;
-using Rabobank.TechnicalTest.GCOB.Dtos;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -16,11 +15,11 @@ namespace Rabobank.TechnicalTest.GCOB.Repositories
         public InMemoryCountryRepository(ILogger logger)
         {
             _logger = logger;
-            Countries.TryAdd(1, new CountryDto { Id = 1, Name = "Netherlands" });
-            Countries.TryAdd(1, new CountryDto { Id = 2, Name = "Poland" });
-            Countries.TryAdd(1, new CountryDto { Id = 3, Name = "Ireland" });
-            Countries.TryAdd(1, new CountryDto { Id = 4, Name = "South Afrcia" });
-            Countries.TryAdd(1, new CountryDto { Id = 5, Name = "India" });
+            Countries.TryAdd(1, new Country { Id = 1, Name = "Netherlands" });
+            Countries.TryAdd(1, new Country { Id = 2, Name = "Poland" });
+            Countries.TryAdd(1, new Country { Id = 3, Name = "Ireland" });
+            Countries.TryAdd(1, new Country { Id = 4, Name = "South Africa" });
+            Countries.TryAdd(1, new Country { Id = 5, Name = "India" });
         }
 
         public Task<CountryDto> GetAsync(int identity)
