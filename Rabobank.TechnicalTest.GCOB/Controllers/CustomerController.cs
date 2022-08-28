@@ -37,9 +37,17 @@ namespace Rabobank.TechnicalTest.GCOB.Controllers
         }
 
         [HttpPost]
-        public Task<IActionResult> Post(CustomerCreateRequest request)
+        public async Task<IActionResult> Post(CustomerCreateRequest request)
         {
-            throw new NotImplementedException();
+            var result = await _customerService.AddCustomer(request);
+
+            if (result.Succeeded)
+                return Ok(result.Value);
+
+            if (result.ErrorType == ErrorType.ValidationError)
+                return BadRequest(result.ErrorMessage);
+
+            return StatusCode((int)HttpStatusCode.InternalServerError);
         }
     }
 }
