@@ -8,7 +8,7 @@ using Rabobank.TechnicalTest.GCOB.Repositories;
 
 namespace Rabobank.TechnicalTest.GCOB.Services
 {
-    public class CustomerService
+    public class CustomerService : ICustomerService
     {
         private readonly ICustomerRepository _customerRepository;
         private readonly IAddressRepository _addressRepository;

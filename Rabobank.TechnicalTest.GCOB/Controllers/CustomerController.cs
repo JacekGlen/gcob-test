@@ -20,7 +20,7 @@ namespace Rabobank.TechnicalTest.GCOB.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<CustomerDto> Get()
+        public Task<CustomerDto> Get(int id)
         {
             throw new NotImplementedException();
         }
