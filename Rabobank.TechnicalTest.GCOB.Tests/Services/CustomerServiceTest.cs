@@ -6,6 +6,7 @@ using AutoFixture.AutoMoq;
 using Castle.Core.Logging;
 using FluentAssertions;
 using Moq;
+using Rabobank.TechnicalTest.GCOB.Entities;
 using Rabobank.TechnicalTest.GCOB.Enums;
 using Rabobank.TechnicalTest.GCOB.Repositories;
 using Rabobank.TechnicalTest.GCOB.Services;
@@ -29,7 +30,7 @@ namespace Rabobank.TechnicalTest.GCOB.Tests.Services
         public async Task GetCustomer_GivenTheCustomerExistsInDB_WhenICallGetCustomer_ThenTheCustomerIsReturned()
         {
             // Arrange
-            var customerToBeRetrieved = _fixture.Create<CustomerDto>();
+            var customerToBeRetrieved = _fixture.Create<Customer>();
             _fixture.Freeze<Mock<ICustomerRepository>>().Setup(x => x.GetAsync(customerToBeRetrieved.Id))
                 .Returns(Task.FromResult(customerToBeRetrieved));
             var sut = _fixture.Create<CustomerService>();
@@ -66,7 +67,7 @@ namespace Rabobank.TechnicalTest.GCOB.Tests.Services
         public async Task AddCustomer_GivenTheCustomerDoesNotExist_WhenICallAddCustomer_ThenTheCustomerIsSavedToDb_AndTheCustomerIsReturned()
         {
             // Arrange
-            var customerToBeAdded = _fixture.Create<CustomerDto>(); 
+            var customerToBeAdded = _fixture.Create<Customer>(); 
             var mockRepo = _fixture.Freeze<Mock<ICustomerRepository>>();
             mockRepo.Setup(x => x.InsertAsync(customerToBeAdded)).Returns(Task.CompletedTask);
             mockRepo.Setup(x => x.GetAsync(customerToBeAdded.Id)).Returns(Task.FromResult(customerToBeAdded));
@@ -84,7 +85,7 @@ namespace Rabobank.TechnicalTest.GCOB.Tests.Services
         public async Task AddCustomer_GivenTheCustomerAlreadyExists_WhenICallAddCustomer_ThenServiceReturnsErrorMessage()
         {
             // Arrange
-            var customerToBeAdded = _fixture.Create<CustomerDto>();
+            var customerToBeAdded = _fixture.Create<Customer>();
             var errorMessage = $"Cannot insert customer with identity '{customerToBeAdded.Id}' as it already exists in the collection";
             var mockRepo = _fixture.Freeze<Mock<ICustomerRepository>>();
             mockRepo.Setup(x => x.InsertAsync(customerToBeAdded)).Throws(new Exception(errorMessage));

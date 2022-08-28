@@ -3,6 +3,7 @@ using System;
 using System.Collections.Concurrent;
 using System.Linq;
 using System.Threading.Tasks;
+using Rabobank.TechnicalTest.GCOB.Entities;
 
 namespace Rabobank.TechnicalTest.GCOB.Repositories
 {
@@ -28,7 +29,7 @@ namespace Rabobank.TechnicalTest.GCOB.Repositories
             });
         }
 
-        public Task InsertAsync(CustomerDto customer)
+        public Task InsertAsync(Customer customer)
         {
             if (Customers.ContainsKey(customer.Id))
             {
@@ -43,7 +44,7 @@ namespace Rabobank.TechnicalTest.GCOB.Repositories
             return Task.FromResult(customer);
         }
 
-        public Task<CustomerDto> GetAsync(int identity)
+        public Task<Customer> GetAsync(int identity)
         {
             _logger.LogDebug($"FindMany Customers with identity {identity}");
 
@@ -52,7 +53,7 @@ namespace Rabobank.TechnicalTest.GCOB.Repositories
             return Task.FromResult(Customers[identity]);
         }
 
-        public Task UpdateAsync(CustomerDto customer)
+        public Task UpdateAsync(Customer customer)
         {
             if (!Customers.ContainsKey(customer.Id))
             {

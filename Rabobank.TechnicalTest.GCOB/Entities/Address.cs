@@ -1,6 +1,6 @@
-﻿namespace Rabobank.TechnicalTest.GCOB.Dtos
+﻿namespace Rabobank.TechnicalTest.GCOB.Entities
 {
-    public sealed class AddressDto
+    public sealed class Address
     {
         public int Id { get; set; }
         public string Street { get; set; }

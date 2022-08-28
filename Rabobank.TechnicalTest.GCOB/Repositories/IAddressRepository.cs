@@ -1,13 +1,14 @@
 ﻿using Rabobank.TechnicalTest.GCOB.Dtos;
 using System.Threading.Tasks;
+using Rabobank.TechnicalTest.GCOB.Entities;
 
 namespace Rabobank.TechnicalTest.GCOB.Repositories
 {
     public interface IAddressRepository
     {
         Task<int> GenerateIdentityAsync();
-        Task InsertAsync(AddressDto address);
-        Task<CustomerDto> GetAsync(int identity);
-        Task UpdateAsync(AddressDto address);
+        Task InsertAsync(Address address);
+        Task<Customer> GetAsync(int identity);
+        Task UpdateAsync(Address address);
     }
 }

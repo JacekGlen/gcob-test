@@ -9,6 +9,7 @@ using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Rabobank.TechnicalTest.GCOB.Dtos;
+using Rabobank.TechnicalTest.GCOB.Entities;
 using Rabobank.TechnicalTest.GCOB.Repositories;
 
 namespace Rabobank.TechnicalTest.GCOB.Tests.Repositories
@@ -32,7 +33,7 @@ namespace Rabobank.TechnicalTest.GCOB.Tests.Repositories
             // Arrange
             var sut = _fixture.Create<InMemoryCustomerRepository>();
 
-            var expectedCustomer = _fixture.Create<CustomerDto>();
+            var expectedCustomer = _fixture.Create<Customer>();
             await sut.InsertAsync(expectedCustomer);
 
             // Act
@@ -61,7 +62,7 @@ namespace Rabobank.TechnicalTest.GCOB.Tests.Repositories
         {
             // Arrange
             var sut = _fixture.Create<InMemoryCustomerRepository>();
-            var customerToBeInserted = _fixture.Create<CustomerDto>();
+            var customerToBeInserted = _fixture.Create<Customer>();
 
             // Act
             await sut.InsertAsync(customerToBeInserted);
@@ -76,7 +77,7 @@ namespace Rabobank.TechnicalTest.GCOB.Tests.Repositories
         {
             // Arrange
             var sut = _fixture.Create<InMemoryCustomerRepository>();
-            var customerToBeInserted = _fixture.Create<CustomerDto>();
+            var customerToBeInserted = _fixture.Create<Customer>();
             await sut.InsertAsync(customerToBeInserted);
 
             // Act
@@ -104,7 +105,7 @@ namespace Rabobank.TechnicalTest.GCOB.Tests.Repositories
         {
             // Arrange
             var sut = _fixture.Create<InMemoryCustomerRepository>();
-            var customers = new List<CustomerDto>();
+            var customers = new List<Customer>();
             _fixture.AddManyTo(customers, 3);
             foreach (var customer in customers)
             {
@@ -125,7 +126,7 @@ namespace Rabobank.TechnicalTest.GCOB.Tests.Repositories
         {
             // Arrange
             var sut = _fixture.Create<InMemoryCustomerRepository>();
-            var customerToBeUpdated = _fixture.Create<CustomerDto>();
+            var customerToBeUpdated = _fixture.Create<Customer>();
             await sut.InsertAsync(customerToBeUpdated);
             const string newCustomerName = "New Name";
             customerToBeUpdated.FirstName = newCustomerName;
@@ -144,7 +145,7 @@ namespace Rabobank.TechnicalTest.GCOB.Tests.Repositories
         {
             // Arrange
             var sut = _fixture.Create<InMemoryCustomerRepository>();
-            var customerToBeUpdated = _fixture.Create<CustomerDto>();
+            var customerToBeUpdated = _fixture.Create<Customer>();
 
             // Act
             Func<Task> act = async () => await sut.UpdateAsync(customerToBeUpdated);

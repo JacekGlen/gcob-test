@@ -1,6 +1,6 @@
-﻿namespace Rabobank.TechnicalTest.GCOB.Dtos
+﻿namespace Rabobank.TechnicalTest.GCOB.Entities
 {
-    public sealed class CountryDto
+    public sealed class Country
     {
         public int Id { get; set; }
         public string Name { get; set; }

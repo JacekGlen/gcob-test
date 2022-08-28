@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Rabobank.TechnicalTest.GCOB.Dtos;
 
 namespace Rabobank.TechnicalTest.GCOB.Controllers
 {
@@ -19,13 +20,13 @@ namespace Rabobank.TechnicalTest.GCOB.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<Customer> Get()
+        public IEnumerable<CustomerDto> Get()
         {
             throw new NotImplementedException();
         }
 
         [HttpPost]
-        public Customer Post()
+        public CustomerDto Post()
         {
             throw new NotImplementedException();
         }

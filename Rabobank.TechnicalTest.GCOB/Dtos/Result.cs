@@ -6,7 +6,6 @@ namespace Rabobank.TechnicalTest.GCOB.Dtos
     /// <summary>
     /// A generic wrapper for service results.
     /// </summary>
-
     public class Result<T>
     {
         public T Value { get; }

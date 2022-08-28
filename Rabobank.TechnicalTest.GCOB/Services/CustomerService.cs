@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Rabobank.TechnicalTest.GCOB.Dtos;
+using Rabobank.TechnicalTest.GCOB.Entities;
 using Rabobank.TechnicalTest.GCOB.Repositories;
 
 namespace Rabobank.TechnicalTest.GCOB.Services
@@ -14,7 +15,7 @@ namespace Rabobank.TechnicalTest.GCOB.Services
             _customerRepository = customerRepository;
         }
 
-        public async Task<Result<CustomerDto>> AddCustomer(CustomerDto customer)
+        public async Task<Result<Customer>> AddCustomer(Customer customer)
         {
             try
             {
@@ -22,22 +23,22 @@ namespace Rabobank.TechnicalTest.GCOB.Services
             }
             catch (Exception ex)
             {
-                return Result<CustomerDto>.Failure(ex);
+                return Result<Customer>.Failure(ex);
             }
 
             return await GetCustomer(customer.Id);
         }
 
-        public async Task<Result<CustomerDto>> GetCustomer(int customerId)
+        public async Task<Result<Customer>> GetCustomer(int customerId)
         {
             try
             {
                 var customer = await _customerRepository.GetAsync(customerId);
-                return Result<CustomerDto>.Success(customer);
+                return Result<Customer>.Success(customer);
             }
             catch (Exception ex)
             {
-                return Result<CustomerDto>.Failure(ex);
+                return Result<Customer>.Failure(ex);
             }
             
         }
