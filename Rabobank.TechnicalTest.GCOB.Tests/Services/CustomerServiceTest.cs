@@ -44,6 +44,26 @@ namespace Rabobank.TechnicalTest.GCOB.Tests.Services
         }
 
         [TestMethod]
+        public async Task GetCustomer_GivenTheCustomerDoesNotExist_WhenICallGetCustomer_ThenAnErrorMessageIsReturned()
+        {
+            // Arrange
+            var customerId = _fixture.Create<int>();
+            var mockRepo = _fixture.Freeze<Mock<ICustomerRepository>>();
+            var errorMessage = customerId.ToString();
+            mockRepo.Setup(x => x.GetAsync(customerId)).Throws(new Exception(errorMessage));
+            var sut = _fixture.Create<CustomerService>();
+
+            // Act
+            var serviceResult = await sut.GetCustomer(customerId);
+
+            // Assert
+            serviceResult.Succeeded.Should().BeFalse();
+            serviceResult.Value.Should().BeNull();
+            serviceResult.ErrorType.Should().Be(ErrorType.Exception);
+            serviceResult.ErrorMessage.Should().Be(errorMessage);
+        }
+
+        [TestMethod]
         public async Task AddCustomer_GivenTheCustomerDoesNotExist_WhenICallAddCustomer_ThenTheCustomerIsSavedToDb_AndTheCustomerIsReturned()
         {
             // Arrange
