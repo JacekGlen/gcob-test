@@ -28,5 +28,10 @@ namespace Rabobank.TechnicalTest.GCOB.Services
             var customerFromDb = await _customerRepository.GetAsync(customer.Id);
             return Result<CustomerDto>.Success(customerFromDb);
         }
+
+        public Task<Result<CustomerDto>> GetCustomer(int customerId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

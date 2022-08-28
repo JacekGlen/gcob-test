@@ -27,9 +27,20 @@ namespace Rabobank.TechnicalTest.GCOB.Tests.Services
 
 
         [TestMethod]
-        public async Task GivenHaveACustomer_AndICallAServiceToGetTheCustomer_ThenTheCustomerIsReturned()
+        public async Task GetCustomer_GivenTheCustomerExistsInDB_WhenICallGetCustomer_ThenTheCustomerIsReturned()
         {
+            // Arrange
+            var customerToBeRetrieved = _fixture.Create<CustomerDto>();
+            var mockRepo = _fixture.Freeze<Mock<ICustomerRepository>>();
+            mockRepo.Setup(x => x.GetAsync(customerToBeRetrieved.Id)).Returns(Task.FromResult(customerToBeRetrieved));
+            var sut = _fixture.Create<CustomerService>();
 
+            // Act
+            var serviceResult = await sut.GetCustomer(customerToBeRetrieved.Id);
+
+            // Assert
+            serviceResult.Succeeded.Should().BeTrue();
+            serviceResult.Value.Should().BeEquivalentTo(customerToBeRetrieved);
         }
 
         [TestMethod]
